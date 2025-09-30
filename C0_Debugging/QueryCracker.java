@@ -11,7 +11,7 @@ public class QueryCracker {
 
         String curr = Integer.toHexString(CODE_LENGTH);
         for (int i = 0; i < CODE_LENGTH; i++) {
-            System.out.println(curr);
+            curr = scramble(curr);
             if (curr.charAt(0) != code.charAt(i)) {
                 throw new QueryCracker.Deny();
             }
