@@ -1,7 +1,13 @@
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.*;
+// Name: Bisente Deleon-Oronia
+// Date: 10/1/2025
+//CSE123
+//C0_SearchEngine
+//TA: Trien Vuong
 
+//This class is to test all of the methods I implemented in the SearchClient and the Book using J unit test
 public class Testing {
 
     @Test
@@ -10,18 +16,18 @@ public class Testing {
         Book book = new Book("Title", List.of("Author 1", "Author 2"), new Scanner("Content"));
 
         // TODO: Change the following to test that getTitle returns "Title"
-        assertEquals("Title", null);
+        assertEquals("Title", book.getTitle());
 
         // TODO: Change the following to test that getArtists returns a list
         //       containing "Author 1" and "Author 2"
-        assertEquals(List.of("Author 1", "Author 2"), null);
+        assertEquals(List.of("Author 1", "Author 2"), book.getArtists());
 
         // TODO: Change the following to test that toString returns the correctly
         //       String representation
-        assertEquals("Title by [Author 1, Author 2]", null);
+        assertEquals("Title by [Author 1, Author 2]", book.toString());
 
         // TODO: Change the following to test that getContent returns a list containing "Content"
-        assertEquals(List.of("Content"), null);
+        assertEquals(List.of("Content"), book.getContent());
     }
 
     @Test
@@ -33,7 +39,7 @@ public class Testing {
 
         book.addRating(1);
         // TODO: Test that getNumRatings returns 1
-
+        assertEquals(1, book.getNumRatings());
 
         book.addRating(1);
         // TODO: Test that getNumRatings returns 2
@@ -73,8 +79,8 @@ public class Testing {
         
         // TODO: Finish the following statements by using assertTrue/assertFalse to test that the 
         //       quotes around sci-fi aren't ignored. Then uncomment it!
-        // assert___(index.containsKey("sci-fi"));
-        // assert___(index.containsKey("\"sci-fi\""));
+         assertTrue(index.containsKey("sci-fi"));
+         assertFalse(index.containsKey("\"sci-fi\""));
 
         // TODO: Change what the 'expected' set contains such that the 
         //       assertEquals(expected, index.get("fantasy")) passes.

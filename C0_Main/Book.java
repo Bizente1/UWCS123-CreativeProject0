@@ -1,3 +1,4 @@
+
 import java.util.*;
 
 public class Book implements Media, Comparable<Book>{
@@ -6,6 +7,7 @@ public class Book implements Media, Comparable<Book>{
     private List<String> authors;
     private Scanner content;
     private ArrayList<Integer> rating = new ArrayList<Integer>();
+    private ArrayList<String> textList = new ArrayList<String>();
 
     public Book(String title, List<String> authors, Scanner content){
         this.title = title;
@@ -34,25 +36,30 @@ public class Book implements Media, Comparable<Book>{
     }
 
     @Override
-    public double getAverageRating() {
-        int avgRating = 0;
-        for (Integer rating : rating) {
-            avgRating += rating;
+    public double getAverageRating(){
+        if(rating.size() == 0){
+            return 0;
         }
 
-        avgRating = (avgRating/this.rating.size());
-        return avgRating;
+        double avgRating = 0;
+        for (Integer rates : rating) {
+            avgRating += rates.intValue();
+        }
+       
+        return (avgRating/this.rating.size());
+
     }
 
     @Override
     public List<String> getContent() {
-        ArrayList<String> textList = new ArrayList<String>();
+        
         while(this.content.hasNext()){
             String[] breakDown = this.content.next().trim().split(" ");
             for(int i = 0; i < breakDown.length; i++){
                 textList.add(breakDown[i]);
             }
         }
+       
         return textList;
     }
 
@@ -61,7 +68,7 @@ public class Book implements Media, Comparable<Book>{
         String toReturn = this.getTitle() + " by " + this.getArtists().toString();
 
         if(this.rating.size() > 0){
-            toReturn += (": " + this.getAverageRating() + " (" + this.getNumRatings() + " ratings)"); 
+            toReturn += (": " + Math.round(getAverageRating()*100.0)/100.0 + " (" + this.getNumRatings() + " ratings)"); 
         }
 
         return toReturn;
@@ -75,15 +82,15 @@ public class Book implements Media, Comparable<Book>{
             return  (int) (this.getAverageRating() - o.getAverageRating());
         }
          */
-        String author1 = this.authors.get(0);
-        String author2 = o.authors.get(0);
+        String title1 = getTitle();
+        String title2 = o.getTitle();
         
-        int alphabeticalOrder = (((int) author2.charAt(0)) - (int) author1.charAt(0));
+        int alphabeticalOrder = (((int) title2.charAt(0)) - (int) title1.charAt(0));
 
-        int minLength = Math.min(author2.length(), author1.length());
+        int minLength = Math.min(title2.length(), title1.length());
 
-        for(int i = 1; (i < minLength) || (alphabeticalOrder == 0); i++){
-            alphabeticalOrder = (((int) author2.charAt(i)) - (int) author1.charAt(i));
+        for(int i = 0; (i < minLength) && (alphabeticalOrder == 0); i++){
+            alphabeticalOrder = (((int) title2.charAt(i)) - (int) title1.charAt(i));
         }
 
         

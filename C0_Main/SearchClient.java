@@ -2,6 +2,9 @@ import java.io.*;
 import java.util.*;
 // Name: Bisente Deleon-Oronia
 // Date: 10/1/2025
+//CSE123
+//C0_SearchEngine
+//TA: Trien Vuong
 
 // This class allows users to find and rate books within BOOK_DIRECTORY
 // containing certain terms
@@ -39,12 +42,18 @@ public class SearchClient {
         System.out.println("See you next time!");
     }
 
-    // TODO: Paste createIndex implementation & comment
+    // Behavior: 
+    //   -Creates a index that maps each word in a Tree Map to a Media.
+    // Parameters:
+    //   - docs: A list of Medias with content
+    // Returns:
+    //   - Map<String, Set<Media>>: a index that maps each word in a Tree Map to a Media.
     public static Map<String, Set<Media>> createIndex(List<Media> docs) {
         Map<String, Set<Media>> invertedIndex = new TreeMap<String, Set<Media>>();
 
         for(Media book: docs){
             for(String word: book.getContent()){
+                word = word.toLowerCase();
                 if(invertedIndex.containsKey(word)){
                     invertedIndex.get(word).add(book);
                 }else {
@@ -56,9 +65,35 @@ public class SearchClient {
         return invertedIndex;
     }
 
-    // TODO: Write and document your search method here
+    // Behavior: 
+    //   - This method calculates net profit or loss based on monthly income and daily spending.
+    // Parameters:
+    //   - income: the user’s income this month
+    //   - spending: the amount the user spent each day this month
+    // Returns:
+    //   - int: the net profit or loss. Positive if profit, negative if loss.
+    // Exceptions:
+    //   - income < 0: if the given income is negative, an IllegalArgumentException is thrown.
     public static Set<Media> search(Map<String, Set<Media>> index, String query) {
-        return new TreeSet<>();
+        Set<Media> queryMatches = new TreeSet<Media>();
+        Scanner words = new Scanner(query);
+        while(words.hasNext()){
+            String word = words.next().trim();
+            System.out.println(index.keySet());
+            //System.out.println(word);
+            if(index.containsKey(word)){
+                queryMatches.addAll(index.get(word));
+            }
+        }
+        words.close();
+        /*
+        for(String word: query.split(" ")){
+            System.out.println(word);
+            //System.out.println(index.keySet());
+
+        }
+        */
+        return queryMatches;
     }
     
     // Allows the user to search a specific query using the provided 'index' to find appropraite
@@ -117,6 +152,7 @@ public class SearchClient {
         List<Media> ret = new ArrayList<>();
         
         File dir = new File(BOOK_DIRECTORY);
+        System.out.println();
         for (File f : dir.listFiles()) {
             Scanner sc = new Scanner(f, "utf-8");
             String title = sc.nextLine().substring("Title: ".length());
