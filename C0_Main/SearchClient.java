@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
-// Name: TODO
-// Date: TODO
+// Name: Bisente Deleon-Oronia
+// Date: 10/1/2025
 
 // This class allows users to find and rate books within BOOK_DIRECTORY
 // containing certain terms
@@ -41,7 +41,19 @@ public class SearchClient {
 
     // TODO: Paste createIndex implementation & comment
     public static Map<String, Set<Media>> createIndex(List<Media> docs) {
-        return new TreeMap<>();
+        Map<String, Set<Media>> invertedIndex = new TreeMap<String, Set<Media>>();
+
+        for(Media book: docs){
+            for(String word: book.getContent()){
+                if(invertedIndex.containsKey(word)){
+                    invertedIndex.get(word).add(book);
+                }else {
+                    invertedIndex.put(word, new HashSet<Media>(Arrays.asList(book)));
+                }
+            }
+        }
+
+        return invertedIndex;
     }
 
     // TODO: Write and document your search method here

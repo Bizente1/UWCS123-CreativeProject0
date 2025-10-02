@@ -24,6 +24,7 @@ public class InvertedIndex {
 
         for(Media book: docs){
             for(String word: book.getContent()){
+                word = word.toLowerCase();
                 if(invertedIndex.containsKey(word)){
                     invertedIndex.get(word).add(book);
                 }else {
