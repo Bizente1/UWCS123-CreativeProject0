@@ -12,6 +12,7 @@ public class InvertedIndex {
         );
         
         Map<String, Set<Media>> result = createIndex(docs);
+        System.out.println(docs.get(0).getContent());
         System.out.println(docs);
         System.out.println();
         System.out.println(result);
@@ -19,6 +20,19 @@ public class InvertedIndex {
 
     // TODO: Write and document your createIndex method here
     public static Map<String, Set<Media>> createIndex(List<Media> docs) {
-        
+        Map<String, Set<Media>> invertedIndex = new TreeMap<String, Set<Media>>();
+
+        for(Media book: docs){
+            for(String word: book.getContent()){
+                if(invertedIndex.containsKey(word)){
+                    invertedIndex.get(word).add(book);
+                }else {
+                    invertedIndex.put(word, new HashSet<Media>(Arrays.asList(book)));
+                }
+            }
+        }
+
+        return invertedIndex;
+
     }
 }

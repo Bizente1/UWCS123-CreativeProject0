@@ -6,7 +6,6 @@ public class Book implements Media, Comparable<Book>{
     private List<String> authors;
     private Scanner content;
     private ArrayList<Integer> rating = new ArrayList<Integer>();
-    private ArrayList<String> bookText = new ArrayList<String>();
 
     public Book(String title, List<String> authors, Scanner content){
         this.title = title;
@@ -53,9 +52,8 @@ public class Book implements Media, Comparable<Book>{
             for(int i = 0; i < breakDown.length; i++){
                 textList.add(breakDown[i]);
             }
-            
-            
         }
+        return textList;
     }
 
     @Override
@@ -80,12 +78,12 @@ public class Book implements Media, Comparable<Book>{
         String author1 = this.authors.get(0);
         String author2 = o.authors.get(0);
         
-        int alphabeticalOrder = (((int) author2.toCharArray()[0]) - (int) author1.toCharArray()[0]);
+        int alphabeticalOrder = (((int) author2.charAt(0)) - (int) author1.charAt(0));
 
         int minLength = Math.min(author2.length(), author1.length());
 
         for(int i = 1; (i < minLength) || (alphabeticalOrder == 0); i++){
-            alphabeticalOrder = (((int) author2.toCharArray()[i]) - (int) author1.toCharArray()[i]);
+            alphabeticalOrder = (((int) author2.charAt(i)) - (int) author1.charAt(i));
         }
 
         
