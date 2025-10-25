@@ -43,7 +43,7 @@ public class Testing {
 
         book.addRating(1);
         // TODO: Test that getNumRatings returns 2
-
+        assertEquals(2, book.getNumRatings());
         
     }
 
@@ -52,14 +52,17 @@ public class Testing {
     public void testAvgRatings() {
         Book book = new Book("Title", List.of("Author"), new Scanner("Content"));
         // TODO: Test that getAverageRating returns 0
+        assertEquals(0, book.getAverageRating());
         
 
         book.addRating(4);
         // TODO: Test that getAverageRating returns 4
+        assertEquals(4, book.getAverageRating());
 
 
         book.addRating(5);
         // TODO: Test that getAverageRating returns 4.5
+        assertEquals(4.5, book.getAverageRating());
 
         
     }
@@ -79,13 +82,13 @@ public class Testing {
         
         // TODO: Finish the following statements by using assertTrue/assertFalse to test that the 
         //       quotes around sci-fi aren't ignored. Then uncomment it!
-         assertTrue(index.containsKey("sci-fi"));
-         assertFalse(index.containsKey("\"sci-fi\""));
+         assertFalse(index.containsKey("sci-fi"));
+         assertTrue(index.containsKey("\"sci-fi\""));
 
         // TODO: Change what the 'expected' set contains such that the 
         //       assertEquals(expected, index.get("fantasy")) passes.
         // Hint: What original books include 'fantasy'?
-        Set<Book> expected = Set.of(mistborn, farenheit, hobbit);
+        Set<Book> expected = Set.of(mistborn, hobbit);
         assertEquals(expected, index.get("fantasy"));
     }
 }

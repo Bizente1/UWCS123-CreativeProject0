@@ -5,14 +5,23 @@ public class Book implements Media, Comparable<Book>{
     
     private String title;
     private List<String> authors;
-    private Scanner content;
-    private ArrayList<Integer> rating = new ArrayList<Integer>();
-    private ArrayList<String> textList = new ArrayList<String>();
+    private List<Integer> rating;
+    private List<String> textList;
 
     public Book(String title, List<String> authors, Scanner content){
         this.title = title;
         this.authors = authors;
-        this.content = content;
+
+        rating = new ArrayList<Integer>();
+        textList = new ArrayList<String>();
+        
+        while(content.hasNext()){
+            String[] breakDown = content.next().trim().split(" ");
+            for(int i = 0; i < breakDown.length; i++){
+                textList.add(breakDown[i]);
+            }
+        }
+        
     }
 
     @Override
@@ -52,14 +61,6 @@ public class Book implements Media, Comparable<Book>{
 
     @Override
     public List<String> getContent() {
-        
-        while(this.content.hasNext()){
-            String[] breakDown = this.content.next().trim().split(" ");
-            for(int i = 0; i < breakDown.length; i++){
-                textList.add(breakDown[i]);
-            }
-        }
-       
         return textList;
     }
 
@@ -68,7 +69,8 @@ public class Book implements Media, Comparable<Book>{
         String toReturn = this.getTitle() + " by " + this.getArtists().toString();
 
         if(this.rating.size() > 0){
-            toReturn += (": " + Math.round(getAverageRating()*100.0)/100.0 + " (" + this.getNumRatings() + " ratings)"); 
+            toReturn += (": " + Math.round(getAverageRating()*100.0)/100.0 +
+                " (" + this.getNumRatings() + " ratings)"); 
         }
 
         return toReturn;

@@ -6,8 +6,8 @@ import java.util.*;
 //C0_SearchEngine
 //TA: Trien Vuong
 
-// This class allows users to find and rate books within BOOK_DIRECTORY
-// containing certain terms
+// This class allows users to find and rate books within a catalogy of books
+// by search for words that related / contained by the book
 public class SearchClient {
     public static final String BOOK_DIRECTORY = "./books";
     private static final Random RAND = new Random();
@@ -17,6 +17,7 @@ public class SearchClient {
     public static final int MAX_RATING = 5;
     public static final int MIN_NUM_RATINGS = 1;
     public static final int MAX_NUM_RATINGS = 100;
+
 
     public static void main(String[] args) throws FileNotFoundException {
         Scanner console = new Scanner(System.in);
@@ -64,22 +65,15 @@ public class SearchClient {
 
         return invertedIndex;
     }
-
-    // Behavior: 
-    //   - This method calculates net profit or loss based on monthly income and daily spending.
-    // Parameters:
-    //   - income: the user’s income this month
-    //   - spending: the amount the user spent each day this month
-    // Returns:
-    //   - int: the net profit or loss. Positive if profit, negative if loss.
-    // Exceptions:
-    //   - income < 0: if the given income is negative, an IllegalArgumentException is thrown.
+/* 
+    Pre: Takes a 
+*/
     public static Set<Media> search(Map<String, Set<Media>> index, String query) {
         Set<Media> queryMatches = new TreeSet<Media>();
         Scanner words = new Scanner(query);
         while(words.hasNext()){
             String word = words.next().trim();
-            System.out.println(index.keySet());
+            //System.out.println(index.keySet());
             //System.out.println(word);
             if(index.containsKey(word)){
                 queryMatches.addAll(index.get(word));
